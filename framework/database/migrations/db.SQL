@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS Task (
+    id BIGSERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    body VARCHAR(255) NOT NULL,
+    statuss VARCHAR(255) NOT NULL,
+    created_at INT NOT NULL,
+    updated_at INT NOT NULL
+);
