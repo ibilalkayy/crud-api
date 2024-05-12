@@ -2,7 +2,6 @@ package create
 
 import (
 	"database/sql"
-	"errors"
 	"fmt"
 
 	"github.com/ibilalkayy/crud-api/entities"
@@ -17,7 +16,7 @@ func CreateTask(db *sql.DB, ct *entities.TaskVariables) error {
 	}
 	defer insert.Close()
 
-	value, err := read.ReadTask(db)
+	value, err := read.ReadAllTasks(db)
 	if err != nil {
 		return err
 	}
@@ -31,7 +30,7 @@ func CreateTask(db *sql.DB, ct *entities.TaskVariables) error {
 			fmt.Println("Task data is successfully inserted!")
 			return nil
 		}
-		return errors.New("enter a new task")
+		fmt.Println("enter a new task")
 	}
 	return nil
 }

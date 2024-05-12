@@ -10,7 +10,7 @@ import (
 
 func ReadTasksHandler(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		tasks, err := read.ReadTask(db)
+		tasks, err := read.ReadSpecificTask("Task 1", db)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
