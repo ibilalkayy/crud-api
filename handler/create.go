@@ -11,20 +11,13 @@ import (
 	"github.com/ibilalkayy/crud-api/framework/database/create"
 )
 
-func CreateTableHandler(db *sql.DB) gin.HandlerFunc {
+func InsertTasksHandler(db *sql.DB) gin.HandlerFunc {
+	date := time.Now().Format("2006/01/02")
 	return func(c *gin.Context) {
 		_, err := database.CreateTable(db, "framework/database/migrations/db.SQL", 0)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
 		}
-		c.JSON(http.StatusOK, gin.H{"message": "Table created successfully"})
-	}
-}
-
-func InsertTasksHandler(db *sql.DB) gin.HandlerFunc {
-	date := time.Now().Format("2006/01/02")
-	return func(c *gin.Context) {
 		tasks := []entities.TaskVariables{
 			{Title: "Task 1", Body: "Task Body 1", Status: "Pending", CreatedAt: date, UpdatedAt: "0"},
 		}

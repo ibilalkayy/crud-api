@@ -28,7 +28,6 @@ func main() {
 	// Initialize Gin router
 	r := gin.Default()
 
-	r.GET("/create_table", handler.CreateTableHandler(db))
 	r.GET("/insert_tasks", handler.InsertTasksHandler(db))
 	r.GET("/read_tasks", handler.ReadTasksHandler(db))
 

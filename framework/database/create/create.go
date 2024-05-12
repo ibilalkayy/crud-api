@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/ibilalkayy/crud-api/entities"
+	"github.com/ibilalkayy/crud-api/framework/database/read"
 )
 
 func CreateTask(db *sql.DB, ct *entities.TaskVariables) error {
@@ -16,13 +17,21 @@ func CreateTask(db *sql.DB, ct *entities.TaskVariables) error {
 	}
 	defer insert.Close()
 
-	if len(ct.Title) != 0 {
-		_, err = insert.Exec(ct.Title, ct.Body, ct.Status, ct.CreatedAt, ct.UpdatedAt)
-		if err != nil {
-			return err
-		}
-		fmt.Println("Task data is successfully inserted!")
-		return nil
+	value, err := read.ReadTask(db)
+	if err != nil {
+		return err
 	}
-	return errors.New("enter the task")
+
+	for _, task := range value {
+		if len(ct.Title) != 0 && ct.Title != task.Title {
+			_, err = insert.Exec(ct.Title, ct.Body, ct.Status, ct.CreatedAt, ct.UpdatedAt)
+			if err != nil {
+				return err
+			}
+			fmt.Println("Task data is successfully inserted!")
+			return nil
+		}
+		return errors.New("enter a new task")
+	}
+	return nil
 }

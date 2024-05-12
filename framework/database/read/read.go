@@ -2,6 +2,7 @@ package read
 
 import (
 	"database/sql"
+	"fmt"
 
 	"github.com/ibilalkayy/crud-api/entities"
 )
@@ -25,6 +26,8 @@ func ReadTask(db *sql.DB) ([]entities.TaskVariables, error) {
 	if err := rows.Err(); err != nil {
 		return nil, err
 	}
+
+	fmt.Println(tasks)
 
 	return tasks, nil
 }
