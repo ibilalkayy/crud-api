@@ -30,6 +30,7 @@ func main() {
 
 	r.GET("/create_table", handler.CreateTableHandler(db))
 	r.GET("/insert_tasks", handler.InsertTasksHandler(db))
+	r.GET("/read_tasks", handler.ReadTasksHandler(db))
 
 	// Run the Gin server
 	if err := r.Run(":8080"); err != nil {

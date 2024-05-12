@@ -3,6 +3,7 @@ package handler
 import (
 	"database/sql"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/ibilalkayy/crud-api/entities"
@@ -22,9 +23,10 @@ func CreateTableHandler(db *sql.DB) gin.HandlerFunc {
 }
 
 func InsertTasksHandler(db *sql.DB) gin.HandlerFunc {
+	date := time.Now().Format("2006/01/02")
 	return func(c *gin.Context) {
 		tasks := []entities.TaskVariables{
-			{Title: "Task 1", Body: "Task Body 1", Status: "Pending", CreatedAt: 2534, UpdatedAt: 43},
+			{Title: "Task 1", Body: "Task Body 1", Status: "Pending", CreatedAt: date, UpdatedAt: "0"},
 		}
 
 		// Insert each task into the database
